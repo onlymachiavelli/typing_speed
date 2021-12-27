@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
-
+import styles from './../styles/Home.module.css'
 const Words = ["hello", "mother", "fucker", "idiot", "cock", "dick", "pussy", "bitch"]
 
 const useWords = () => {
@@ -12,7 +12,7 @@ const useGenWords = (a) => {
   const [word, setWords] = useState("")
 
   useEffect(() => {
-    for (let i = 0; i < 10; i++) setWords(word + Words[Math.floor(Math.random() * Words.length - 1)])
+    setWords(word + Words[Math.floor(Math.random() * Words.length - 1)] + " ")
   }, [word])
   return { setWords, word }
 
@@ -21,10 +21,10 @@ const useGenWords = (a) => {
 
 const App = () => {
   const [val, setVal] = useState("")
-
+  const { word, setWords } = useGenWords()
   return (
     <div>
-      <div>words</div>
+      <div className={styles.word}>{word}</div>
       <input type="text" value={val}
         onChange={(e) =>
           setVal(e.target.value)
