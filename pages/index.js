@@ -12,7 +12,7 @@ const useGenWords = (a) => {
   const [word, setWords] = useState("")
 
   useEffect(() => {
-    setWords(word + Words[Math.floor(Math.random() * Words.length - 1)] + " ")
+    setWords(word + Words[Math.floor(Math.random() * Words.length)] + " ")
   }, [word])
   return { setWords, word }
 
