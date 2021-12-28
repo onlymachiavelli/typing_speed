@@ -7,8 +7,11 @@ const useTimer = () => {
     const [launch, setLaunch] = useState(false)
 
     useEffect(() => {
-        time == 0 ? setLaunch(false) : setLaunch(launch)
-        time == 0 ? setTime(60) : setTime(time)
+
+        time === 0 ? setLaunch(false) : setLaunch(launch)
+        time === 0 ? setTime(60) : setTime(time)
+
+
         if (launch) {
             let timer = setInterval(() => {
                 setTime(time - 1)

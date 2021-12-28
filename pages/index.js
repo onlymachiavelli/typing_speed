@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
 import styles from './../styles/Home.module.css'
+
+import useTimer from '../src/hooks/useTimer'
+
 const Words = ["hello", "mother", "fucker", "idiot", "cock", "dick", "pussy", "bitch"]
+
 
 const useWords = () => {
 
@@ -10,18 +14,31 @@ const useWords = () => {
 
 const useGenWords = (a) => {
   const [word, setWords] = useState("")
-
+  const [run, setRun] = useState(false)
   useEffect(() => {
-    setWords(word + Words[Math.floor(Math.random() * Words.length)] + " ")
-  }, [word])
-  return { setWords, word }
+    if (run) {
+
+      for (let i = 0; i < 10; i++)setWords(word + Words[Math.floor(Math.random() * Words.length)] + " ")
+
+    }
+  }, [word, run])
+  return { setWords, word, run, setRun }
 
 }
 
 
+
 const App = () => {
-  const [val, setVal] = useState("")
+
+  const { time, launch, setTime, setLaunch } = useTimer()
   const { word, setWords } = useGenWords()
+  useEffect(() => {
+    setLaunch(true)
+
+  }, [])
+  const [val, setVal] = useState("")
+
+
   return (
     <div>
       <div className={styles.word}>{word}</div>
@@ -31,7 +48,7 @@ const App = () => {
         }
       />
 
-      <p></p>
+      <p>{time}</p>
     </div>
   )
 }
